@@ -1,0 +1,80 @@
+/nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd {0 {vcom -work work -2002 -explicit -vopt -stats=none /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd
+Model Technology ModelSim SE-64 vcom 10.4c Compiler 2015.07 Jul 19 2015
+-- Loading package STANDARD
+-- Loading package cpu_defs_pack
+-- Loading package mem_defs_pack
+-- Compiling entity MaxCPU
+-- Compiling architecture functional of MaxCPU
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(51): (vcom-1136) Unknown identifier "code_ldc".
+** Error (suppressible): /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(51): (vcom-1937) Choice in CASE statement alternative must be locally static.
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(51): (vcom-1136) Unknown identifier "Data".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(51): Target type (error) in variable assignment is different from expression type std.STANDARD.INTEGER.
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(51): (vcom-1136) Unknown identifier "Data".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(51): (vcom-1136) Unknown identifier "Reg".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(52): (vcom-1136) Unknown identifier "Set_Flags_Load".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(55): (vcom-1136) Unknown identifier "code_ldd".
+** Error (suppressible): /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(55): (vcom-1937) Choice in CASE statement alternative must be locally static.
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(55): (vcom-1136) Unknown identifier "Data".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(55): Target type (error) in variable assignment is different from expression type std.STANDARD.INTEGER.
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(55): (vcom-1136) Unknown identifier "Data".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(55): (vcom-1136) Unknown identifier "Reg".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(56): (vcom-1136) Unknown identifier "Set_Flags_Load".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(59): (vcom-1136) Unknown identifier "code_ldr".
+** Error (suppressible): /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(59): (vcom-1937) Choice in CASE statement alternative must be locally static.
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(59): (vcom-1136) Unknown identifier "Data".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(59): Target type (error) in variable assignment is different from expression type std.STANDARD.INTEGER.
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(59): (vcom-1136) Unknown identifier "Data".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(59): (vcom-1136) Unknown identifier "Reg".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(59): (vcom-1136) Unknown identifier "Reg".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(60): (vcom-1136) Unknown identifier "Set_Flags_Load".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(62): (vcom-1136) Unknown identifier "code_std".
+** Error (suppressible): /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(62): (vcom-1937) Choice in CASE statement alternative must be locally static.
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(62): (vcom-1136) Unknown identifier "Reg".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(65): (vcom-1136) Unknown identifier "code_str".
+** Error (suppressible): /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(65): (vcom-1937) Choice in CASE statement alternative must be locally static.
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(65): (vcom-1136) Unknown identifier "Reg".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(74): (vcom-1136) Unknown identifier "code_jmp".
+** Error (suppressible): /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(74): (vcom-1937) Choice in CASE statement alternative must be locally static.
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(76): (vcom-1136) Unknown identifier "code_jz".
+** Error (suppressible): /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(76): (vcom-1937) Choice in CASE statement alternative must be locally static.
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(76): (vcom-1136) Unknown identifier "zero".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(77): (vcom-1136) Unknown identifier "INC".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(79): (vcom-1136) Unknown identifier "code_jnz".
+** Error (suppressible): /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(79): (vcom-1937) Choice in CASE statement alternative must be locally static.
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(79): (vcom-1136) Unknown identifier "zero".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(79): Type error resolving prefix expression "not" as type std.STANDARD.BOOLEAN.
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(80): (vcom-1136) Unknown identifier "INC".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(82): (vcom-1136) Unknown identifier "code_jc".
+** Error (suppressible): /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(82): (vcom-1937) Choice in CASE statement alternative must be locally static.
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(82): (vcom-1136) Unknown identifier "carry".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(83): (vcom-1136) Unknown identifier "INC".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(92): (vcom-1136) Unknown identifier "code_not".
+** Error (suppressible): /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(92): (vcom-1937) Choice in CASE statement alternative must be locally static.
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(92): near "?": syntax error
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(92): (vcom-1136) Unknown identifier "Reg".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(93): (vcom-1136) Unknown identifier "Set_Flags_Logic".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(94): (vcom-1136) Unknown identifier "code_and".
+** Error (suppressible): /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(94): (vcom-1937) Choice in CASE statement alternative must be locally static.
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(94): (vcom-1136) Unknown identifier "Reg".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(94): (vcom-1136) Unknown identifier "Reg".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(94): (vcom-1136) Unknown identifier "Data".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(94): Bad right hand side (infix expression) in variable assignment.
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(94): (vcom-1136) Unknown identifier "Reg".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(95): (vcom-1136) Unknown identifier "Set_Flags_Logic".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(96): (vcom-1136) Unknown identifier "code_add".
+** Error (suppressible): /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(96): (vcom-1937) Choice in CASE statement alternative must be locally static.
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(96): (vcom-1136) Unknown identifier "EXEC_ADDC".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(98): (vcom-1136) Unknown identifier "code_addc".
+** Error (suppressible): /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(98): (vcom-1937) Choice in CASE statement alternative must be locally static.
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(98): (vcom-1136) Unknown identifier "EXEC_ADDC".
+** Error: /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/main_entity.vhd(111): VHDL Compiler exiting
+
+} {8.0 9.0 10.0 16.0 17.0 23.0 24.0 31.0 32.0 34.0 35.0 37.0 38.0 39.0 40.0 43.0 44.0 48.0 49.0 52.0 53.0 57.0 58.0 65.0 66.0 68.0 69.0 71.0} {}} /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/mem_defs_pack.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /nfs/TUEIEDA/LabVHDL-SystemC/2016s/ga85yig/MaxCPU/mem_defs_pack.vhd
+Model Technology ModelSim SE-64 vcom 10.4c Compiler 2015.07 Jul 19 2015
+-- Loading package STANDARD
+-- Loading package cpu_defs_pack
+-- Compiling package mem_defs_pack
+-- Compiling package body mem_defs_pack
+-- Loading package mem_defs_pack
+
+} {} {}}
