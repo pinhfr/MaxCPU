@@ -87,6 +87,38 @@ begin
 			-- ROLC ~ Carry & D := rotate_left(Carry & S1)
 			-- ROR  ~ D := rotate_right(S1)
 			-- RORC ~ Carry & D := rotate_right(Carry & S1)
+			
+			when code_sll  => Carry := Reg(Y) / 2**(data_width - 1); Data := (Reg(Y) mod 2**(data_width - 1))*2;
+ 					  Set_Flags_Load(Data, Zero, Negative, Overflow);
+					  PC := INC(PC);
+			-- 100101 => 1; 001010
+			-- 011101 => 0; 111010
+			when code_srl  => Carry := Reg(Y) mod 2; Data := Reg(Y) / 2;
+ 					  Set_Flags_Load(Data, Zero, Negative, Overflow);
+					  PC := INC(PC);
+			-- 100101 => 010010; 1
+			-- 011101 => 001110; 1
+			when code_sra  => Carry := Reg(Y) mod 2; Data := Reg(Y) - (Reg(Y) mod 2**(data_width - 1)) + Reg(Y) / 2;
+					  Set_Flags_Load(Data, Zero, Negative, Overflow);
+					  PC := INC(PC);
+			-- 100101 => 110010; 1
+			-- 011101 => 001110; 1
+			when code_rol  => Data := (Reg(Y) mod 2**(data_width - 1))*2 + Reg(Y) / 2**(data_width - 1);
+					  Set_Flags_Load(Data, Zero, Negative, Overflow);
+					  PC := INC(PC);
+			-- 100101 => 001011
+			-- 011101 => 111010
+			when code_rolc => Data := (Reg(Y) mod 2**(data_width - 1))*2 + Carry; Carry := Reg(Y) / 2**(data_width - 1);
+			-- 1;00101 => 0;01011
+			-- 0;11101 => 1;11010
+			when code_ror  => Data := Reg(Y) / 2 + (Reg(Y) mod 2) * 2**(data_width - 1);
+					  Set_Flags_Load(Data, Zero, Negative, Overflow);
+					  PC := INC(PC);
+			-- 100101 => 110010
+			-- 011101 => 101110
+			when code_rorc => Data := Reg(Y) / 2 + Carry * 2**(data_width - 1); Carry := Reg(Y) mod 2;
+			-- 1;00101 => 1;10010
+			-- 0;11101 => 1;01110
 
 		        ------------------------------------------------- MEMORY ACCESS
 
