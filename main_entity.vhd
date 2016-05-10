@@ -1,6 +1,7 @@
 use WORK.cpu_defs_pack.all;
 use WORK.mem_defs_pack.all;
 use WORK.arith_defs_pack.all;
+use std.textio.all;
 
 entity MaxCPU is
 end MaxCPU;
@@ -8,6 +9,13 @@ end MaxCPU;
 architecture functional of MaxCPU is
 begin
 	process
+		file TraceFile : Text is out ?Trace?;
+		file DumpFile : Text is out ?Dump?;
+		file MemoryFile : Text is in ?Memory?;
+		file IOInputFile : Text is in ?IOInput?;
+		file IOOutputFile: Text is out ?IOOutput?;
+		variable l : line;
+
 		--variable Data  : data_type;
 		variable Instr : data_type; -- bedeutet, wir werden Befehle benutzen
 		variable OP    : data_type; -- und auch Verfahren
@@ -26,6 +34,7 @@ begin
 		-- further objects
 		begin
 
+		init_memory (MemoryFile, Memory);
 		-- cmd fetch - Fetch the first instruction from the memory
 		-- Format: OOOOOO XX YY ZZ
 		-- Instr := O * 64 + X * 16 + Y * 4 + Z; 
@@ -48,7 +57,7 @@ begin
 			------------------------------------------------- MISCELLANEOUS
 
 			when code_nop  => null;
-			when code_stop => wait;
+			when code_stop => dump_memory( Memory, DumpFile ); wait;
 
 			------------------------------------------------- ARITHMETIC
 			
