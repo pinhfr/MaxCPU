@@ -23,7 +23,8 @@ package cpu_defs_pack is
 	
 	type mem_type is array(addr_type) of data_type;	
 	
-	constant code_nop  : opcode_type:= 0;
+	constant code_nop : opcode_type:= 0;
+
 	constant code_stop : opcode_type:= 1;
 
 end cpu_defs_pack;
