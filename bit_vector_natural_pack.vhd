@@ -7,7 +7,14 @@ end bit_vector_natural_pack;
 
 package body bit_vector_natural_pack is
 	function bit_vector2natural (bv : in bit_vector) return natural is
+		variable nrnat : natural := 0;
 
+		begin 
+		for i in bv'LEFT downto 0 loop
+			nrnat := nrnat + bv'pos(bv(i)) * 2;
+		end loop;
+
+		return nrnat;
 	end bit_vector2natural;
 
 	function natural2bit_vector (nat : in natural) return bit_vector is
