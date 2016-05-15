@@ -1,7 +1,9 @@
 use WORK.cpu_defs_pack.all;
 use WORK.mem_defs_pack.all;
 use WORK.arith_defs_pack.all;
-use std.textio.all;
+use WORK.logical_defs_pack.all;
+use std.textio.all;
+
 
 entity MaxCPU is
 end MaxCPU;
@@ -9,23 +11,23 @@ end MaxCPU;
 architecture functional of MaxCPU is
 begin
 	process
-		file TraceFile : Text is out ?Trace?;
-		file DumpFile : Text is out ?Dump?;
-		file MemoryFile : Text is in ?Memory?;
-		file IOInputFile : Text is in ?IOInput?;
-		file IOOutputFile: Text is out ?IOOutput?;
-		variable l : line;
+		file TraceFile   : Text is out "TraceFile.txt";
+		file DumpFile    : Text is out "DumpFile.txt";
+		file MemoryFile  : Text is in "MemoryFile.txt";
+		file IOInputFile : Text is in "IO_InputFile.txt";
+		file IOOutputFile: Text is out "IO_OutputFile.txt";		
+		variable l : line; -- pointer to string
 
-		--variable Data  : data_type;
-		variable Instr : data_type; -- bedeutet, wir werden Befehle benutzen
-		variable OP    : data_type; -- und auch Verfahren
+		variable Reg   : reg_type;
+		variable Data  : data_type;
+		variable Instr : data_type; -- Intruction for the CPU
+		variable OP    : data_type; -- Operations of the CPU
 		variable Memory: mem_type := (
-			0    => code_nop*(2**reg_addr_width)**3,
-			1     => code_stop*(2**reg_addr_width)**3,
-			others => 0
-		);
-		variable PC : addr_type := 0;
-		variable X,Y,Z : reg_addr_type; -- die Variablen, auf denen Befehle gemacht werden
+						0    => code_nop*(2**reg_addr_width)**3,
+						1    => code_stop*(2**reg_addr_width)**3,
+						others => 0);
+		variable PC: addr_type := 0;
+		variable X, Y, Z : reg_addr_type; -- die Variablen, auf denen Befehle gemacht werden
 
 		-- In order to store particular results of some operations
 		-- For details see pdf spec
@@ -34,7 +36,8 @@ begin
 		-- further objects
 		begin
 
-		init_memory (MemoryFile, Memory);
+		init_memory (MemoryFile, Memory);
+
 		-- cmd fetch - Fetch the first instruction from the memory
 		-- Format: OOOOOO XX YY ZZ
 		-- Instr := O * 64 + X * 16 + Y * 4 + Z; 
@@ -53,7 +56,6 @@ begin
 
 		-- cmd decode
 		case OP is
-
 			------------------------------------------------- MISCELLANEOUS
 
 			when code_nop  => null;
@@ -78,7 +80,7 @@ begin
 			when code_subc => EXEC_SUBC();
 
 			------------------------------------------------- LOGICAL
-
+			-- OPCODE D S1 S2
 			-- NOT ~ D := NOT S1
 			-- AND ~ D := S1 AND S2
 			-- OR  ~ D := S1 OR S2
@@ -86,6 +88,14 @@ begin
 			-- REA ~ LSB(D) := reduced_and(S1)
 			-- REO ~ LSB(D) := reduced_or(S1)
 			-- REX ~ LSB(D) := reduced_xor(S1)
+
+			when code_not => Data   := "NOT"(Reg(Y)); Reg(X) := Data;
+			when code_and => Data   := "AND"(Reg(Y), Reg(Z)); Reg(X) := Data; 
+			when code_or  => Data   := "OR"(Reg(Y), Reg(Z)); Reg(X) := Data;
+			when code_xor => Data   := "XOR"(Reg(Y), Reg(Z)); Reg(X) := Data;
+		    when code_rea => Reg(X) := setLsb(X, REA(Y));
+		    when code_reo => Reg(X) := setLsb(X, REO(Y));
+		    when code_rex => Reg(X) := setLsb(X, REX(Y));
 
 			------------------------------------------------- SHIFT/ROTATE
 
@@ -153,7 +163,7 @@ begin
 			when code_std  => Memory(Memory(PC)):=Reg(X);
  					  PC := INC(PC);
 			-- Stelle X vom Register wird in die Stelle kopiert, deren Adresse in nächste Stelle liegt
-			when code_str  => Memory(Reg(Y)):=Reg(X);
+			when code_str  => Memory(Reg(Y)) := Reg(X);
 			-- man kopiert Stelle X vom Register in die Stellem dren Adresse in Stelle Y vom Register lieg
 
 			------------------------------------------------- I/O
@@ -162,8 +172,8 @@ begin
 
 		        ------------------------------------------------- JUMP OPERATIONS 
 
-			
 			when code_jmp  => PC := Memory(PC); -- Unconditional Jump. Simply points to the memory address
+
 			when code_jz   => if Zero then PC := Memory(PC); 	  -- Jump if Zero flag = '1'
  					  else PC := INC(PC); end if;
 			when code_jc   => if Carry then PC := Memory(PC);	  -- Jump if Carry flag = '1'
@@ -180,19 +190,6 @@ begin
 					  else PC := INC(PC); end if; 
 			when code_jno   => if not Overflow then PC := Memory(PC); -- Jump if Negative flag is = '0'
 					  else PC := INC(PC); end if;
-
-			-- **********************
-			-- ** LOGIC OPERATIONS **
-			-- **********************
-
-			--when code_not  => Data := ?NOT?( Reg(Y) ); Reg(X) := Data;
-			--		  Set_Flags_Logic(Data,Zero,Carry,Negative,Overflow);
-			--when code_and  => Data := Reg(Y) AND Reg(Z); Reg(X) := Data;
-			--		  Set_Flags_Logic(Data,Zero,Carry,Negative,Overflow);
-			--when code_add  => EXEC_ADDC(Reg(Y), Reg(Z), FALSE, Reg(X),
-				--	  Zero, Carry, Negative, Overflow);
-			--when code_addc => EXEC_ADDC(Reg(Y), Reg(Z), Carry, Reg(X),
-				--	  Zero, Carry, Negative, Overflow);
 
 		        ------------------------------------------------- UNEXPECTED CODE
 

@@ -6,12 +6,14 @@ package bit_vector_natural_pack is
 end bit_vector_natural_pack;
 
 package body bit_vector_natural_pack is
-	function bit_vector2natural (bv : in bit_vector) return natural is
+	function bit_vector2natural (bv : bit_vector) return natural is
 		variable nrnat : natural := 0;
 
-		begin 
+		begin
+		-- assert bv'LEFT >= 0 and bv'LEFT < 31;
+		-- assert bv'RIGHT = 0;
 		for i in bv'LEFT downto 0 loop
-			nrnat := nrnat + bv'pos(bv(i)) * 2;
+			nrnat := nrnat + bit'pos(bv(i)) * 2;
 		end loop;
 
 		return nrnat;
