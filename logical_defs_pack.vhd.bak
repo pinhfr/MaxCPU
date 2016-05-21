@@ -118,7 +118,7 @@ package body logical_defs_pack is
 		tmp_x := tmp_x - tmp_x mod 2;
 		if b_set = '1' then
 			tmp_x := tmp_x + 1;
-		end if;
+		end if
 		return tmp_x;
 	end setLsb;
 

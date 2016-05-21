@@ -1,6 +1,6 @@
 use WORK.cpu_defs_pack.all;
 use WORK.mem_defs_pack.all;
-use WORK.arith_defs_pack.all;
+use WORK.arithm_defs_pack.all;
 use WORK.logical_defs_pack.all;
 use std.textio.all;
 
@@ -36,7 +36,7 @@ begin
 		-- further objects
 		begin
 
-		init_memory (MemoryFile, Memory);
+		--init_memory ();
 
 		-- cmd fetch - Fetch the first instruction from the memory
 		-- Format: OOOOOO XX YY ZZ
@@ -59,7 +59,8 @@ begin
 			------------------------------------------------- MISCELLANEOUS
 
 			when code_nop  => null;
-			when code_stop => dump_memory( Memory, DumpFile ); wait;
+			when code_stop => --dump_memory( Memory, DumpFile );
+					  wait;
 
 			------------------------------------------------- ARITHMETIC
 			
@@ -174,21 +175,21 @@ begin
 
 			when code_jmp  => PC := Memory(PC); -- Unconditional Jump. Simply points to the memory address
 
-			when code_jz   => if Zero then PC := Memory(PC); 	  -- Jump if Zero flag = '1'
+			when code_jz   => if Zero then PC := memory_type(Memory(PC)); 	  -- Jump if Zero flag = '1'
  					  else PC := INC(PC); end if;
-			when code_jc   => if Carry then PC := Memory(PC);	  -- Jump if Carry flag = '1'
+			when code_jc   => if Carry then PC := memory_type(Memory(PC));	  -- Jump if Carry flag = '1'
 					  else PC := INC(PC); end if;
-			when code_jn   => if Negative then PC := Memory(PC); 	  -- Jump if Negative flag is = '1'
+			when code_jn   => if Negative then PC := memory_type(Memory(PC)); 	  -- Jump if Negative flag is = '1'
 					  else PC := INC(PC); end if; 
-			when code_jo   => if Overflow then PC := Memory(PC); 	  -- Jump if Overflow flag is = '1'
+			when code_jo   => if Overflow then PC := memory_type(Memory(PC)); 	  -- Jump if Overflow flag is = '1'
 					  else PC := INC(PC); end if;
-			when code_jnz   => if not Zero then PC := Memory(PC); 	  -- Jump if Zero flag = '0'
+			when code_jnz   => if not Zero then PC := memory_type(Memory(PC)); 	  -- Jump if Zero flag = '0'
  					  else PC := INC(PC); end if;
-			when code_jnc   => if not Carry then PC := Memory(PC); 	  -- Jump if Carry flag = '0'
+			when code_jnc   => if not Carry then PC := memory_type(Memory(PC)); 	  -- Jump if Carry flag = '0'
 					  else PC := INC(PC); end if;
-			when code_jnn   => if not Negative then PC := Memory(PC); -- Jump if Negative flag is = '0'
+			when code_jnn   => if not Negative then PC := memory_type(Memory(PC)); -- Jump if Negative flag is = '0'
 					  else PC := INC(PC); end if; 
-			when code_jno   => if not Overflow then PC := Memory(PC); -- Jump if Negative flag is = '0'
+			when code_jno   => if not Overflow then PC := memory_type(Memory(PC)); -- Jump if Negative flag is = '0'
 					  else PC := INC(PC); end if;
 
 		        ------------------------------------------------- UNEXPECTED CODE

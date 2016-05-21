@@ -62,7 +62,7 @@ package cpu_defs_pack is
 	constant code_jnn : opcode_type  := 55;
 	constant code_jno : opcode_type  := 56;
 
-	procedure Set_Flags_Load(Data: in data_type; Zero, Negative, Overflow: in boolean);
+	procedure Set_Flags_Load(Zero, Carry, Negative, Overflow: in boolean);
 
 end cpu_defs_pack;
 
