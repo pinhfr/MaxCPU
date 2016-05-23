@@ -1,6 +1,6 @@
 use WORK.cpu_defs_pack.all;
 use WORK.mem_defs_pack.all;
-use WORK.arithm_defs_pack.all;
+use WORK.arith_defs_pack.all;
 use WORK.logical_defs_pack.all;
 use std.textio.all;
 
