@@ -21,6 +21,7 @@ begin
 		variable Data  : data_type;
 		variable Instr : data_type; -- Intruction for the CPU
 		variable OP    : opcode_type; -- Operations of the CPU -- changed
+		variable tmp: integer;
 
 		-- variable Memory : mem_type := init_memory;
 		variable Memory: mem_type := (
@@ -111,40 +112,55 @@ begin
 			-- RORC ~ Carry & D := rotate_right(Carry & S1)
 			
 			when code_sll  => if Reg(Y) / 2**(data_width - 1) = 1 then Carry := true; else Carry := false; end if;
-					  Data := (Reg(Y) mod 2**(data_width - 1))*2;
- 					  --Set_Flags_Load(Data, Zero, Negative, Overflow);
+					  tmp := (Reg(Y) mod 2**(data_width - 1))*2;
+ 					  Set_Flags_Load(tmp, Zero, Negative, Overflow);
+					  Data := tmp mod 2**(data_width - 1);
 					  PC := INC(PC);
 			-- 100101 => 1; 001010
 			-- 011101 => 0; 111010
 
-			when code_srl  => if Reg(Y) mod 2 = 1 then Carry := true; else Carry := false; end if; Data := Reg(Y) / 2;
- 					  --Set_Flags_Load(Data, Zero, Negative, Overflow);
+			when code_srl  => if Reg(Y) mod 2 = 1 then Carry := true; else Carry := false; end if;
+					  tmp := Reg(Y) / 2;
+ 					  Set_Flags_Load(tmp, Zero, Negative, Overflow);
+					  Data := tmp mod 2**(data_width - 1);
 					  PC := INC(PC);
 			-- 100101 => 010010; 1
 			-- 011101 => 001110; 1
-			when code_sra  => if Reg(Y) mod 2 = 1 then Carry := true; else Carry := false; end if; Data := Reg(Y) - (Reg(Y) mod 2**(data_width - 1)) + Reg(Y) / 2;
-					  --Set_Flags_Load(Data, Zero, Negative, Overflow);
+			when code_sra  => if Reg(Y) mod 2 = 1 then Carry := true; else Carry := false; end if;
+					  tmp := Reg(Y) - (Reg(Y) mod 2**(data_width - 1)) + Reg(Y) / 2;
+					  Set_Flags_Load(Data, Zero, Negative, Overflow);
+					  Data := tmp mod 2**(data_width - 1);
 					  PC := INC(PC);
 			-- 100101 => 110010; 1
 			-- 011101 => 001110; 1
-			when code_rol  => Data := (Reg(Y) mod 2**(data_width - 1))*2 + Reg(Y) / 2**(data_width - 1);
-					  --Set_Flags_Load(Data, Zero, Negative, Overflow);
+			when code_rol  => 
+					  tmp := (Reg(Y) mod 2**(data_width - 1))*2 + Reg(Y) / 2**(data_width - 1);
+					  Set_Flags_Load(tmp, Zero, Negative, Overflow);
 					  PC := INC(PC);
 			-- 100101 => 001011
 			-- 011101 => 111010
-			when code_rolc => Data := (Reg(Y) mod 2**(data_width - 1))*2;
-					  if Carry then Data := Data + 1; end if;
+			when code_rolc => tmp := (Reg(Y) mod 2**(data_width - 1))*2;
+					  if Carry then tmp := tmp + 1; end if;
 					  if Reg(Y) / 2**(data_width - 1) = 1 then Carry := true; else Carry := false; end if;
+					  Set_Flags_Load(Data, Zero, Negative, Overflow);
+					  Data := tmp mod 2**(data_width - 1);
+					  PC := INC(PC);
 			-- 1;00101 => 0;01011
 			-- 0;11101 => 1;11010
-			when code_ror  => Data := Reg(Y) / 2 + (Reg(Y) mod 2) * 2**(data_width - 1);
-					  --Set_Flags_Load(Data, Zero, Negative, Overflow);
+			when code_ror  => 
+					  tmp := Reg(Y) / 2 + (Reg(Y) mod 2) * 2**(data_width - 1);
+					  Set_Flags_Load(tmp, Zero, Negative, Overflow);
+					  Data := tmp mod 2**(data_width - 1);
 					  PC := INC(PC);
 			-- 100101 => 110010
 			-- 011101 => 101110
-			when code_rorc => Data := Reg(Y) / 2;
-					  if Carry then Data := Data + 2**(data_width - 1); end if;
+			when code_rorc => 
+					  tmp := Reg(Y) / 2;
+					  if Carry then tmp := tmp + 2**(data_width - 1); end if;
 					  if Reg(Y) mod 2 = 1 then Carry := true; else Carry := false; end if;
+					  Set_Flags_Load(tmp, Zero, Negative, Overflow);
+					  Data := tmp mod 2**(data_width - 1);
+					  PC := INC(PC);
 			-- 1;00101 => 1;10010
 			-- 0;11101 => 1;01110
 
