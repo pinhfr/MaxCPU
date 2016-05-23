@@ -25,38 +25,38 @@ package body logical_defs_pack is
 	function "NOT" (constant A: data_type) return data_type is
 		begin
 
-		return WORK.bit_vector_natural_pack.bit_vector2natural(
-			not WORK.bit_vector_natural_pack.natural2bit_vector(A)
+		return bit_vector2natural(
+			not natural2bit_vector(A)
 		);
 	end "NOT";
 
 	-- X := Y AND Z
 	function "AND" (constant A, B: data_type) return data_type is
 		begin
-		return WORK.bit_vector_natural_pack.bit_vector2natural(
-			WORK.bit_vector_natural_pack.natural2bit_vector(A) 
+		return bit_vector2natural(
+			natural2bit_vector(A) 
 			and 
-			WORK.bit_vector_natural_pack.natural2bit_vector(B)
+			natural2bit_vector(B)
 		);
 	end "AND";
 
 	-- X := Y OR Z
 	function "OR" (constant A, B: data_type) return data_type is
 		begin
-		return WORK.bit_vector_natural_pack.bit_vector2natural(
-			WORK.bit_vector_natural_pack.natural2bit_vector(A) 
+		return bit_vector2natural(
+			natural2bit_vector(A) 
 			or 
-			WORK.bit_vector_natural_pack.natural2bit_vector(B)
+			natural2bit_vector(B)
 		);
 	end "OR";
 
 	-- X := Y XOR Z
 	function "XOR" (constant A, B: data_type) return data_type is
 		begin
-		return WORK.bit_vector_natural_pack.bit_vector2natural(
-			WORK.bit_vector_natural_pack.natural2bit_vector(A) 
+		return bit_vector2natural(
+			natural2bit_vector(A) 
 			xor 
-			WORK.bit_vector_natural_pack.natural2bit_vector(B)
+			natural2bit_vector(B)
 		);
 	end "XOR";
 
@@ -66,7 +66,7 @@ package body logical_defs_pack is
 		variable appl_lsb_x : bit := '0';
 
 		begin
-		tmp_regx := WORK.bit_vector_natural_pack.natural2bit_vector(A);
+		tmp_regx := natural2bit_vector(A);
 
 		for i in tmp_regx'range loop
 			appl_lsb_x := appl_lsb_x AND tmp_regx(i);
@@ -81,7 +81,7 @@ package body logical_defs_pack is
 		variable appl_lsb_x : bit := '0';
 
 		begin
-		tmp_regx := WORK.bit_vector_natural_pack.natural2bit_vector(A);
+		tmp_regx := natural2bit_vector(A);
 
 		for i in tmp_regx'range loop
 			appl_lsb_x := appl_lsb_x OR tmp_regx(i);
@@ -96,7 +96,7 @@ package body logical_defs_pack is
 		variable appl_lsb_x : bit := '0';
 
 		begin
-		tmp_regx := WORK.bit_vector_natural_pack.natural2bit_vector(A);
+		tmp_regx := natural2bit_vector(A);
 
 		for i in tmp_regx'range loop
 			appl_lsb_x := appl_lsb_x XOR tmp_regx(i);
@@ -107,19 +107,19 @@ package body logical_defs_pack is
 
 	function setLsb (constant A: data_type; constant b_set: bit) return data_type is
 
-		variable tmp_x: data_type;
+		variable tmp_x : bit_vector((addr_width-1) downto 0);		
+
 		begin
+		
+		tmp_x := natural2bit_vector(A);	
 
 		-- for most significant bit, use:
 		--tmp_x(tmp_x'LENGTH) := b_set;
 
 		-- set the least significant bit to b_set
-		tmp_x := A;
-		tmp_x := tmp_x - tmp_x mod 2;
-		if b_set = '1' then
-			tmp_x := tmp_x + 1;
-		end if;
-		return tmp_x;
+		tmp_x(0) := b_set;
+
+		return bit_vector2natural(tmp_x);
 	end setLsb;
 
 end logical_defs_pack;

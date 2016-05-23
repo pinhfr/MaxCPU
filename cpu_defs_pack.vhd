@@ -1,6 +1,7 @@
+use WORK.bit_vector_natural_pack.all;
 package cpu_defs_pack is
-
-	constant bus_width  : natural := 12;
+--use WORK.bit_vector_natural_pack.all;
+constant bus_width  : natural := 12;
 	constant data_width : natural := bus_width;
 	constant addr_width : natural := bus_width;
 	
@@ -21,7 +22,7 @@ package cpu_defs_pack is
 
 	type reg_type is array(reg_addr_type) of data_type;
 	
-	type mem_type is array(addr_type) of data_type;	
+	type mem_type is array(addr_type) of data_type;
 	
 	function INC (A : in addr_type) return addr_type;
 
@@ -62,22 +63,21 @@ package cpu_defs_pack is
 	constant code_jnn : opcode_type  := 55;
 	constant code_jno : opcode_type  := 56;
 
-	procedure Set_Flags_Load(Data: in data_type; Zero, Negative, Overflow: in boolean);
-
 end cpu_defs_pack;
 
 package body cpu_defs_pack is
 
-function INC( A : in addr_type ) return addr_type is
-begin
-	if(A < 2**addr_width-1) then
-		return A+1;
-	end if;
-end INC;
-
-procedure Set_Flags_Load(Data: in data_type; Zero, Negative, Overflow: in boolean) is
-begin
+	function INC(A : in addr_type ) return addr_type is
+		variable C : bit := '1';
+		variable R : bit_vector (data_width - 1 downto 0);
+		variable A_vect : bit_vector (data_width - 1 downto 0);
+		begin
+		A_vect := natural2bit_vector(A);
+		for i in A_vect'reverse_range loop
+			R(i) := A_vect(i) xor C;
+			C    := A_vect(i) and C;
+		end loop;
+		return bit_vector2natural(R);
+	end INC;
 	
-end procedure Set_Flags_Load;
-
 end cpu_defs_pack;

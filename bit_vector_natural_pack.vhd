@@ -1,4 +1,4 @@
-use WORK.cpu_defs_pack.all;
+--use WORK.cpu_defs_pack.all;
 
 package bit_vector_natural_pack is
 	function bit_vector2natural (bv  : in bit_vector) return natural;
@@ -20,11 +20,11 @@ package body bit_vector_natural_pack is
 	end bit_vector2natural;
 
 	function natural2bit_vector (nat : in natural) return bit_vector is
-		variable result : bit_vector (data_width - 1 downto 0);
+		variable result : bit_vector (11 downto 0);
 		variable result_temp : natural := nat;
 
 		begin 
-		for i in 0 to (data_width - 1) loop
+		for i in 0 to (11) loop
 			result(i) := bit'val(result_temp mod 2); -- bit'val converts the type integer to bit, bit'pos does the opposite 
 			result_temp := result_temp/2;
 		end loop;
