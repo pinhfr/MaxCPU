@@ -1,7 +1,8 @@
 use WORK.bit_vector_natural_pack.all;
+
 package cpu_defs_pack is
---use WORK.bit_vector_natural_pack.all;
-constant bus_width  : natural := 12;
+
+	constant bus_width  : natural := 12;
 	constant data_width : natural := bus_width;
 	constant addr_width : natural := bus_width;
 	
@@ -25,6 +26,8 @@ constant bus_width  : natural := 12;
 	type mem_type is array(addr_type) of data_type;
 	
 	function INC (A : in addr_type) return addr_type;
+
+	--procedure Set_Flags_Load (D : in data_type; Z, N, O : in boolean);
 
 	constant code_nop : opcode_type  := 0;
 	constant code_stop : opcode_type := 1;
@@ -80,4 +83,17 @@ package body cpu_defs_pack is
 		return bit_vector2natural(R);
 	end INC;
 	
+	--procedure Set_Flags_Load (D : in data_type; Z, N, O : in boolean) is
+		
+	--	begin
+
+	--	if D = 0 then
+	--	 	Z := TRUE;
+	--	else Z:= FALSE;
+		
+	--	msb(D)
+		
+		
+	--end procedure;
+
 end cpu_defs_pack;
