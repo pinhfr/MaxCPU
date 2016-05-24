@@ -15,6 +15,7 @@ begin
 		file MemoryFile  : Text is in "testbench/MemoryFile.txt";
 		file IOInputFile : Text is in "testbench/IO_InputFile.txt";
 		file IOOutputFile: Text is out "testbench/IO_OutputFile.txt";		
+
 		variable l: line; -- pointer to string
 
 		variable Reg   : reg_type;
