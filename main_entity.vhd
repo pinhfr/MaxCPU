@@ -15,15 +15,15 @@ begin
 		file MemoryFile  : Text is in "testbench/MemoryFile.txt";
 		file IOInputFile : Text is in "testbench/IO_InputFile.txt";
 		file IOOutputFile: Text is out "testbench/IO_OutputFile.txt";		
-
 		variable l: line; -- pointer to string
 
 		variable Reg   : reg_type;
 		variable Data  : data_type;
 		variable Instr : data_type; -- Intruction for the CPU
 		variable OP    : opcode_type; -- Operations of the CPU -- changed
-		variable tmp: integer;
-
+		variable tmp   : integer;
+    variable var   : data_type; -- temporar data_type variable for I/0
+    variable erfolg: Boolean; -- erfolg variable I/0
 		-- variable Memory : mem_type := init_memory;
 		variable Memory: mem_type := (
 						0    => code_nop*(2**reg_addr_width)**3,
@@ -195,6 +195,15 @@ begin
 			------------------------------------------------- I/O
 			-- IN  D _ _ ~ D := data_from_input_device
 			-- OUT S _ _ ~ data_to_output_device := S
+		  
+		  when code_in  => if (not endfile(IOInputFile)) then
+		                     readline(IOInputFile,l);
+		                     read(l,var,erfolg);
+		                     if erfolg then 
+		                       Reg(X) := var;
+		                     end if;
+		                   end if;
+		  when code_out => write(IOOutputFile,l)
 
 		        ------------------------------------------------- JUMP OPERATIONS 
 
