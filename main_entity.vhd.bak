@@ -165,7 +165,7 @@ begin
 			-- 1;00101 => 1;10010
 			-- 0;11101 => 1;01110
 
-		 ------------------------------------------------- MEMORY ACCESS
+		        ------------------------------------------------- MEMORY ACCESS
 
 			-- LDC ~ D := const
 			-- LDD ~ D := mem(addr)
@@ -176,21 +176,22 @@ begin
 			-- was passiert zwischen Speicher und Register wird hier beschreibt
 
 			when code_ldc  => Data := Memory(PC); Reg(X) := Data;
- 					  Set_Flags_Load(Data, Zero, Negative, Overflow);
+ 					  --Set_Flags_Load(Data, Zero, Negative, Overflow);
 					  PC := INC(PC);
 			-- man speichert das Datei aus Nächste Stelle in Stelle X vom Register
 			when code_ldd  => Data := Memory(Memory(PC)); Reg(X) := Data;
- 					  Set_Flags_Load(Data,Zero,Negative,Overflow);
+ 					  --Set_Flags_Load(Data,Zero,Negative,Overflow);
 					  PC := INC(PC);
 			-- man kopiert die Stelle, deren Adresse in nächste Stelle liegt in Stelle X vom Register
 			when code_ldr  => Data :=Memory(Reg(Y)); Reg(X) := Data;
- 					  Set_Flags_Load(Data,Zero,Negative,Overflow);
+ 					  --Set_Flags_Load(Data,Zero,Negative,Overflow);
 			-- man kopiert die Stelle, deren Adresse in Stelle Y vom Register liegt in Stelle X vom Register
 			when code_std  => Memory(Memory(PC)):=Reg(X);
  					  PC := INC(PC);
 			-- Stelle X vom Register wird in die Stelle kopiert, deren Adresse in nächste Stelle liegt
 			when code_str  => Memory(Reg(Y)) := Reg(X);
 			-- man kopiert Stelle X vom Register in die Stellem dren Adresse in Stelle Y vom Register lieg
+
 			------------------------------------------------- I/O
 			-- IN  D _ _ ~ D := data_from_input_device
 			-- OUT S _ _ ~ data_to_output_device := S
