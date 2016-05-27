@@ -25,9 +25,9 @@ package cpu_defs_pack is
 	
 	type mem_type is array(addr_type) of data_type;
 	
-	function INC (A : in addr_type) return addr_type;
+	function INC(A : in addr_type ) return addr_type;
 
-	--procedure Set_Flags_Load (D : in data_type; Z, N, O : in boolean);
+	procedure Set_Flags_Load (T_s : in integer; Z, N, O : inout boolean);
 
 	constant code_nop : opcode_type  := 0;
 	constant code_stop : opcode_type := 1;
@@ -71,29 +71,35 @@ end cpu_defs_pack;
 package body cpu_defs_pack is
 
 	function INC(A : in addr_type ) return addr_type is
-		variable C : bit := '1';
-		variable R : bit_vector (data_width - 1 downto 0);
-		variable A_vect : bit_vector (data_width - 1 downto 0);
 		begin
-		A_vect := natural2bit_vector(A);
-		for i in A_vect'reverse_range loop
-			R(i) := A_vect(i) xor C;
-			C    := A_vect(i) and C;
-		end loop;
-		return bit_vector2natural(R);
+
+		return (A + 1) mod 2**addr_width;
+
 	end INC;
 	
-	--procedure Set_Flags_Load (D : in data_type; Z, N, O : in boolean) is
+	procedure Set_Flags_Load (T_s : in integer; Z, N, O : inout boolean) is
 		
-	--	begin
-
-	--	if D = 0 then
-	--	 	Z := TRUE;
-	--	else Z:= FALSE;
-		
-	--	msb(D)
-		
-		
-	--end procedure;
+		begin
+			
+		if T_s >= 2**data_width then
+			O := true;
+			if T_s mod 2*data_width = 0 then
+				Z := true;
+			else Z := false;
+			end if;
+		elsif T_s < -2**data_width then
+			O := true;
+			if 2**(data_width+1)*T_s mod 2*data_width = 0 then
+				Z := true;
+			else Z := false;
+			end if;
+		elsif T_s < 0 then
+			N := true;
+			if 2**(data_width)*T_s mod 2*data_width = 0 then
+				Z := true;
+			else Z := false;
+			end if;
+		end if;
+	end procedure;
 
 end cpu_defs_pack;

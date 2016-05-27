@@ -11,7 +11,7 @@ package arithm_defs_pack is
 
 	procedure EXEC_ADDC (	
 	      constant A, B     : in data_type;				
-	      variable CI       : in boolean;
+	      constant CI       : in boolean;
 	      variable R        : out data_type;
 	      variable Z,CO,N,O : out boolean);
 				
@@ -19,7 +19,7 @@ package arithm_defs_pack is
 	
 	procedure EXEC_SUBC (	
 	      constant A, B     : in data_type;				
-	      variable CI       : in boolean;
+	      constant CI       : in boolean;
 	      variable R        : out data_type;
 	      variable Z,CO,N,O : out boolean);
 
@@ -32,33 +32,35 @@ package body arithm_defs_pack is
 	
 	procedure EXEC_ADDC (	
 	  constant A, B     : in data_type; --- input variables
-		variable CI       : in boolean; --- input carry 
+		constant CI       : in boolean; --- input carry 
 		variable R        : out data_type;  --- result
-		variable Z,CO,N,O : out boolean) is --- zero, output carry, Negative,   Overflow
+		variable Z,CO,N,O : out boolean) is --- zero,  carry output, Negative,   Overflow
 				
-          variable T: integer := A+B+Boolean'Pos( CI );
-	  variable A_s, B_s, T_s :integer; -- signed interpretation
+          variable T: integer := A+B+Boolean'Pos(CI); -- make the unsigned sum
+	  
+	variable A_s, B_s, T_s :integer; -- signed interpretation
+
 	  begin
 	    --- determine the sign of A
 	    if A >= 2**(data_width-1) then 
-	      A_s := A-2**(data_width);
+	      A_s := A - 2**(data_width);
 	    else 
 	      A_s := A;
 	    end if;
 	  
 	    --- determine the sign of B
 	    if B >= 2**(data_width-1) then
-	      B_s := B-2**(data_width);
+	      B_s := B - 2**(data_width);
 	    else 
 	      B_s := B;
 	    end if;
 		
-	    T_s := A_s+B_s+Boolean'Pos( CI );
+	    T_s := A_s + B_s + Boolean'Pos( CI ); -- make the signed sum
 		
 		  --- output carry 
 		  if T >= 2**data_width then
 	      R := T-2**(data_width); 
-	      CO := True;
+	      CO := True; 
 	    else 
 	      R := T;
 	      CO := False;
@@ -90,7 +92,7 @@ package body arithm_defs_pack is
 	
 	procedure EXEC_SUBC (	
           constant A, B     : in data_type;  --- input variables
-	  variable CI       : in boolean;  --- input carry 
+	  constant CI       : in boolean;  --- input carry 
           variable R        : out data_type;   --- result
 	  variable Z,CO,N,O : out boolean )is --- zero, output carry, Negative,   Overflow
 				
