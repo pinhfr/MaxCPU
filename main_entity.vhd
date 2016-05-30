@@ -296,6 +296,7 @@ begin
 		writeline(TraceFile, l);
 
 	end loop;
+	dump_memory(DumpFile, Memory);
 	
 	end process;
 end functional;
