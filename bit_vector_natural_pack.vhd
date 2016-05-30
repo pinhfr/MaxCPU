@@ -1,5 +1,3 @@
---use WORK.cpu_defs_pack.all;
-
 package bit_vector_natural_pack is
 	function bit_vector2natural (bv  : in bit_vector) return natural;
 	function natural2bit_vector (nat : in natural)    return bit_vector;
@@ -10,8 +8,8 @@ package body bit_vector_natural_pack is
 		variable nrnat : natural := 0;
 
 		begin
-		-- assert bv'LEFT >= 0 and bv'LEFT < 31;
-		-- assert bv'RIGHT = 0;
+		assert bv'LEFT >= 0 and bv'LEFT < 31;
+		assert bv'RIGHT = 0;
 		for i in bv'LEFT downto 0 loop
 			nrnat := nrnat + bit'pos(bv(i)) * 2;
 		end loop;

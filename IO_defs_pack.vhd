@@ -1,3 +1,4 @@
+
 use WORK.cpu_defs_pack.all;
 use std.textio.all;
 
@@ -32,8 +33,10 @@ package body IO_defs_pack is
 		variable l:line;
 		
 		begin
-		write(l , string'("PC  | Cmd  | XYZ | P    | R0  | R1  | R2 | R3  | ZCNO"));
+		write(l , string'("PC  | Cmd  | XYZ | P    | R0  | R1  | R2  | R3  | ZCNO"));
 		writeline(f , l);
+		write( l , string'("------------------------------------------------------"));
+		writeline( f , l );
 	
 	end print_header;
 
@@ -42,7 +45,7 @@ package body IO_defs_pack is
 		variable l:line;
 		
 		begin
-		write( l , string'("------------------------------------------"));
+		write( l , string'("------------------------------------------------------"));
 		writeline( f , l );
 	
 	end print_tail;
@@ -181,4 +184,3 @@ package body IO_defs_pack is
 	end cmd_image;
 
 end IO_defs_pack;
-

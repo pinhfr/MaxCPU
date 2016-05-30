@@ -4,7 +4,6 @@ use std.textio.all;
 package mem_defs_pack is
 
 	procedure init_memory(variable f : in text; variable mem: out mem_type);
-	procedure dump_memory(variable f : out text; variable mem: in mem_type);
 
  constant memory_content : mem_type;
 procedure EXEC_ldc(constant memory: in mem_type;
@@ -30,6 +29,9 @@ procedure EXEC_ldc(constant memory: in mem_type;
   procedure EXEC_str(variable memory: out mem_type;
 		constant Reg_Y, Reg_X: in data_type);
 
+  procedure dump_memory(
+		variable f : out text;
+		variable mem: in mem_type);
 end mem_defs_pack;
 
 package body mem_defs_pack is
@@ -65,7 +67,7 @@ package body mem_defs_pack is
 		end loop;
 		end loop;
 	end init_memory;
-	
+
 	procedure dump_memory(
 		variable f : out text;
 		variable mem: in mem_type) is
