@@ -82,7 +82,7 @@ package body IO_defs_pack is
 		
 		begin
 
-		write( l , string'(" --- | "));
+		write( l , string'("--- | "));
 
 	end write_NoParam;
 

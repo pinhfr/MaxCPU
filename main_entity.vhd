@@ -212,12 +212,12 @@ begin
         -- was passiert zwischen Speicher und Register wird hier beschreibt
           when code_ldc=>write_Param(l,Memory(PC));
 		EXEC_ldc(memory,Reg(X),PC,zero,Negative,Overflow);   
-	        PC := INC(PC);	
+	        --PC := INC(PC);	
         -- man speichert das Datei aus Nächste Stelle in Stelle X vom Register
           
         when code_ldd=> write_Param(l,Memory(Memory(PC)));
 	EXEC_ldd(memory,Reg(X),PC,zero,Negative,Overflow);
-           PC := INC(PC);
+           --PC := INC(PC);
         -- man kopiert die Stelle, deren Adresse in nächste Stelle liegt in Stelle X vom Register
 
           when code_ldr=>write_Param(l,Memory(Reg(Y)));
@@ -226,7 +226,7 @@ begin
         
          when code_std=> write_Param(l,Memory(Memory(PC)));
 	EXEC_std( memory,Reg(X), PC);   
-            PC := INC(PC);
+            --PC := INC(PC);
         -- Stelle X vom Register wird in die Stelle kopiert, deren Adresse in nächste Stelle liegt
 
           when code_str=> write_Param(l,Memory(Reg(Y)));
