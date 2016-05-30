@@ -94,6 +94,22 @@ begin
 			-- REO ~ LSB(D) := reduced_or(S1)
 			-- REX ~ LSB(D) := reduced_xor(S1)
 
+<<<<<<< HEAD
+			when code_not => write_NoParam(l); Data   := "NOT"(Reg(Y)); Reg(X) := Data;
+					  --PC := INC(PC);
+			when code_and => write_NoParam(l); Data   := "AND"(Reg(Y), Reg(Z)); Reg(X) := Data; 
+
+			when code_or  => write_NoParam(l); Data   := "OR"(Reg(Y), Reg(Z)); Reg(X) := Data;
+
+			when code_xor => write_NoParam(l); Data   := "XOR"(Reg(Y), Reg(Z)); Reg(X) := Data;
+
+		    	when code_rea => write_NoParam(l); Reg(X) := setLsb(X, REA(Y));
+
+		    	when code_reo => write_NoParam(l); Reg(X) := setLsb(X, REO(Y));
+
+		    	when code_rex => write_NoParam(l); Reg(X) := setLsb(X, REX(Y));
+
+=======
 			when code_not => Data   := "NOT"(Reg(Y)); Reg(X) := Data;
 			when code_and => Data   := "AND"(Reg(Y), Reg(Z)); Reg(X) := Data; 
 			when code_or  => Data   := "OR"(Reg(Y), Reg(Z)); Reg(X) := Data;
@@ -101,6 +117,7 @@ begin
 		    when code_rea => Reg(X) := setLsb(X, REA(Y));
 		    when code_reo => Reg(X) := setLsb(X, REO(Y));
 		    when code_rex => Reg(X) := setLsb(X, REX(Y));
+>>>>>>> 9f0b2d24438a7856622943847f01302b0419f856
 
 			------------------------------------------------- SHIFT/ROTATE
 
@@ -172,6 +189,32 @@ begin
 			-- LDR ~ D := mem(RA)
 			-- STD ~ mem(addr) := S
 			-- STR ~ mem(RA) := S
+<<<<<<< HEAD
+
+			-- was passiert zwischen Speicher und Register wird hier beschreibt
+
+			when code_ldc  => write_Param(l,Memory(PC));			
+					  Data := Memory(PC); Reg(X) := Data;
+					  Set_Flags_Load(Data, Data, Zero, Negative, Overflow);
+					  
+			-- man speichert das Datei aus Nächste Stelle in Stelle X vom Register
+			when code_ldd  => write_Param(l,Memory(PC));
+					  Data := Memory(Memory(PC)); Reg(X) := Data;
+					  Set_Flags_Load(Data, Data, Zero, Negative, Overflow);
+			-- man kopiert die Stelle, deren Adresse in nächste Stelle liegt in Stelle X vom Register
+			when code_ldr  => write_NoParam(l);
+					  Data :=Memory(Reg(Y)); Reg(X) := Data;
+					  Set_Flags_Load(Data, Data, Zero, Negative, Overflow);
+			-- man kopiert die Stelle, deren Adresse in Stelle Y vom Register liegt in Stelle X vom Register
+			when code_std  => write_Param(l,Memory(PC));
+					  Memory(Memory(PC)):=Reg(X);
+ 					  
+			-- Stelle X vom Register wird in die Stelle kopiert, deren Adresse in nächste Stelle liegt
+			when code_str  => write_NoParam(l);
+					  Memory(Reg(Y)) := Reg(X);
+					  
+			-- man kopiert Stelle X vom Register in die Stellem dren Adresse in Stelle Y vom Register lieg
+=======
 		-- was passiert zwischen Speicher und Register wird hier beschreibt
  		 when code_ldc=>write_Param(l,Memory(PC));EXEC_ldc(memory,Reg(X),PC,zero,Negative,Overflow);   PC := INC(PC);
 		-- man speichert das Datei aus Nächste Stelle in Stelle X vom Register
@@ -187,6 +230,7 @@ begin
 
  		 when code_str=> write_Param(l,Memory(Reg(Y)));EXEC_str( memory,Reg(Y), Reg(X));
 		-- man kopiert Stelle X vom Register in die Stellem dren Adresse in Stelle Y vom Register lieg
+>>>>>>> 9f0b2d24438a7856622943847f01302b0419f856
 			
 
 ------------------------------------------------- I/O
@@ -216,7 +260,12 @@ begin
 					  else PC := INC(PC); end if;
 			when code_jnz   => if not Zero then PC := Memory(PC); 	  -- Jump if Zero flag = '0'
  					  else PC := INC(PC); end if;
+<<<<<<< HEAD
+			when code_jnc  => write_Param(l,Memory(PC));
+					  if not Carry then PC := Memory(PC); 	  -- Jump if Carry flag = '0'
+=======
 			when code_jnc   => if not Carry then PC := Memory(PC); 	  -- Jump if Carry flag = '0'
+>>>>>>> 9f0b2d24438a7856622943847f01302b0419f856
 					  else PC := INC(PC); end if;
 			when code_jnn   => if not Negative then PC := Memory(PC); -- Jump if Negative flag is = '0'
 					  else PC := INC(PC); end if; 
