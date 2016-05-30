@@ -125,7 +125,7 @@ begin
 
 		    	when code_reo => write_NoParam(l); Reg(X) := setLsb(X, REO(Y));
 
-		    	when code_rex => write_NoParam(l); Reg(X) := setLsb(X, REX(Y));
+		    	when code_rex => w-rite_NoParam(l); Reg(X) := setLsb(X, REX(Y));
 
 
 			------------------------------------------------- SHIFT/ROTATE
@@ -221,6 +221,7 @@ begin
 			when code_ldd  => write_Param(l,Memory(PC));
 					  Data := Memory(Memory(PC)); Reg(X) := Data;
 					  Set_Flags_Load(Data, Data, Zero, Negative, Overflow);
+					  PC:=INC(PC);	
 			-- man kopiert die Stelle, deren Adresse in nächste Stelle liegt in Stelle X vom Register
 			when code_ldr  => write_NoParam(l);
 					  Data :=Memory(Reg(Y)); Reg(X) := Data;
@@ -228,7 +229,7 @@ begin
 			-- man kopiert die Stelle, deren Adresse in Stelle Y vom Register liegt in Stelle X vom Register
 			when code_std  => write_Param(l,Memory(PC));
 					  Memory(Memory(PC)):=Reg(X);
- 					  
+ 					  PC:=INC(PC);
 			-- Stelle X vom Register wird in die Stelle kopiert, deren Adresse in nächste Stelle liegt
 			when code_str  => write_NoParam(l);
 					  Memory(Reg(Y)) := Reg(X);
@@ -275,7 +276,7 @@ begin
 					  if not Zero then PC := Memory(PC); 	  -- Jump if Zero flag = '0'
  					  else PC := INC(PC); end if;
 			when code_jnc  => write_Param(l,Memory(PC));
-					  if not Carry then PC := Memory(PC); 	  -- Jump if Carry flag = '0'
+					  -if not Carry then PC := Memory(PC); 	  -- Jump if Carry flag = '0'
 					  else PC := INC(PC); end if;
 			when code_jnn  => write_Param(l,Memory(PC));
 					  if not Negative then PC := Memory(PC); -- Jump if Negative flag is = '0'
