@@ -77,7 +77,7 @@ begin
 					  write_regs (l, Reg, Zero, Carry, Negative, Overflow);					  
 					  writeline( TraceFile, l);
 					  print_tail( TraceFile );
-					  --dump_memory(Memory, DumpFile);	    			  
+					  dump_memory(DumpFile, Memory);	    			  
 					  wait; 
 			------------------------------------------------- ARITHMETIC
 			
@@ -296,7 +296,7 @@ begin
 		writeline(TraceFile, l);
 
 	end loop;
-	dump_memory(DumpFile, Memory);
+--	dump_memory(DumpFile, Memory);
 	
 	end process;
 end functional;
