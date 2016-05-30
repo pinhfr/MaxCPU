@@ -246,7 +246,6 @@ begin
 		                   	  	readline(IOInputFile, l);
 		                   	  	read(l,var,erfolg);
 		                   	  	if erfolg then 
-							Set_Flags_Load(var, var, Zero, Negative, Overflow);
 		                   	  		Reg(X) := var;
 		                   	  	end if;
 		                   	end if;
