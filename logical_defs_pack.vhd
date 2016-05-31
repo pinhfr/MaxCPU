@@ -25,29 +25,32 @@ package body logical_defs_pack is
 	function "NOT" (constant A: data_type) return data_type is
 		begin
 
-		return bit_vector2natural(
-			not natural2bit_vector(A)
-		);
+		return 2**data_width - 1 - A;
+
 	end "NOT";
 
 	-- X := Y AND Z
 	function "AND" (constant A, B: data_type) return data_type is
-		begin
-		return bit_vector2natural(
-			natural2bit_vector(A) 
-			and 
-			natural2bit_vector(B)
-		);
+		variable c : data_type; 
+		begin 
+		c:=0;
+		for i in 0 to data_width - 1 loop
+				c :=c+2**(data_width-1-i)*((A mod 2**(data_width-i))/2**(data_width-1-i))*((B mod 2**(data_width-i))/2**(data_width-1-i));
+			end loop;
+		return c;
 	end "AND";
 
 	-- X := Y OR Z
 	function "OR" (constant A, B: data_type) return data_type is
-		begin
-		return bit_vector2natural(
-			natural2bit_vector(A) 
-			or 
-			natural2bit_vector(B)
-		);
+		variable c,v : data_type; 
+		begin 
+		c:=0;
+		v:=0;
+		for i in 0 to data_width - 1 loop
+				v:=((A mod 2**(data_width-i))/2**(data_width-1-i))+((B mod 2**(data_width-i))/2**(data_width-1-i));
+				c :=c+2**(data_width-1-i)*((v+v/2)Ãmod 2);
+			end loop;
+		return c;
 	end "OR";
 
 	-- X := Y XOR Z

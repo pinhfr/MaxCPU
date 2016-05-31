@@ -1,4 +1,3 @@
-
 use WORK.cpu_defs_pack.all;
 use std.textio.all;
 
@@ -54,7 +53,7 @@ package body IO_defs_pack is
 		constant PC: in data_type;
 		constant OP: in opcode_type;
 		constant X,Y,Z: in reg_addr_type) is
-		
+		variable my_line : line;
 		begin
 
 		write( l , hex_image(PC), left, 3);
@@ -178,7 +177,7 @@ package body IO_defs_pack is
 			assert FALSE
 			report "Illegal command in cmd_image"
 			severity warning;
-			return "";
+			return "ILL";
 		end case;
 
 	end cmd_image;
