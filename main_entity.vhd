@@ -120,27 +120,34 @@ begin
 				when code_not => write_NoParam(l);
 					Data := "not"(Reg(Y));
 					Reg(X) := Data;
+					Carry  := False;
 
 				when code_and => write_NoParam(l);
 					Data := "and"(Reg(Y), Reg(Z));
 					Reg(X) := Data;
+					Carry  := False;
 
 				when code_or => write_NoParam(l);
 					Data := "or"(Reg(Y), Reg(Z));
 					Reg(X) := Data;
+					Carry  := False;
 
 				when code_xor => write_NoParam(l);
 					Data := "xor"(Reg(Y), Reg(Z));
 					Reg(X) := Data;
+					Carry  := False;
 
 				when code_rea => write_NoParam(l);
 					Reg(X) := setLsb(Reg(X), REA(Reg(Y)));
+					Carry  := False;
 
 				when code_reo => write_NoParam(l);
 					Reg(X) := setLsb(Reg(X), REO(Reg(Y)));
+					Carry  := False;
 
 				when code_rex => write_NoParam(l);
 					Reg(X) := setLsb(Reg(X), REX(Reg(Y)));
+					Carry  := False;
 
 					------------------------------------------------- SHIFT/ROTATE
 
@@ -194,6 +201,7 @@ begin
 				Data := tmp mod 2 ** (data_width);
 				Set_Flags_Load(Data, Reg(Y), Zero, Negative, Overflow);
 				Reg(X) := Data;
+				Carry  := False;
 
 				-- 100101 => 001011
 				-- 011101 => 111010
@@ -217,6 +225,7 @@ begin
 					--Set_Flags_Load(tmp, Zero, Negative, Overflow);
 					Data := tmp mod 2 ** (data_width);
 					Reg(X) := Data;
+					Carry  := False;
 
 					-- 100101 => 110010
 					-- 011101 => 101110
