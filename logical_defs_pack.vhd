@@ -55,12 +55,15 @@ package body logical_defs_pack is
 
 	-- X := Y XOR Z
 	function "XOR" (constant A, B: data_type) return data_type is
-		begin
-		return bit_vector2natural(
-			natural2bit_vector(A) 
-			xor 
-			natural2bit_vector(B)
-		);
+		variable c,v : data_type; 
+		begin 
+		c:=0;
+		v:=0;
+		for i in 0 to data_width - 1 loop
+				v:=((A mod 2**(data_width-i))/2**(data_width-1-i))+((B mod 2**(data_width-i))/2**(data_width-1-i));
+				c :=c+2**(data_width-1-i)*(v mod 2);
+			end loop;
+		return c;
 	end "XOR";
 
 	-- Use AND operator on all bits of Y and assign it to the least significant bit of X
