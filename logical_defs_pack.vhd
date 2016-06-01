@@ -1,4 +1,3 @@
-use WORK.bit_vector_natural_pack.all;
 use WORK.cpu_defs_pack.all;
 
 package logical_defs_pack is
@@ -68,47 +67,40 @@ package body logical_defs_pack is
 
 	-- Use AND operator on all bits of Y and assign it to the least significant bit of X
 	function REA (constant A: data_type) return bit is
-		variable tmp_regx : bit_vector((addr_width-1) downto 0);
-		variable appl_lsb_x : bit := '0';
 
 		begin
-		tmp_regx := natural2bit_vector(A);
+		if A = 2**data_width-1 then 
+			return '1';
+		else 
+			return '0';
 
-		for i in tmp_regx'range loop
-			appl_lsb_x := appl_lsb_x AND tmp_regx(i);
-		end loop;
-
-		return appl_lsb_x;
+		end if;
 	end REA;
 
 	-- Use OR operator on all bits of Y and assign it to the least significant bit of X
 	function REO (constant A: data_type) return bit is
-		variable tmp_regx : bit_vector((addr_width-1) downto 0);
-		variable appl_lsb_x : bit := '0';
-
 		begin
-		tmp_regx := natural2bit_vector(A);
+		if A = 0 then 
+			return '0';
+		else 
+			return '1';
 
-		for i in tmp_regx'range loop
-			appl_lsb_x := appl_lsb_x OR tmp_regx(i);
-		end loop;
-
-		return appl_lsb_x;
+		end if;
 	end REO;
 
 	-- Use XOR operator on all bits of Y and assign it to the least significant bit of X
 	function REX (constant A: data_type) return bit is
-		variable tmp_regx : bit_vector((addr_width-1) downto 0);
-		variable appl_lsb_x : bit := '0';
-
-		begin
-		tmp_regx := natural2bit_vector(A);
-
-		for i in tmp_regx'range loop
-			appl_lsb_x := appl_lsb_x XOR tmp_regx(i);
-		end loop;
-
-		return appl_lsb_x;
+		variable c : data_type; 
+		begin 
+		c:=0;
+		for i in 0 to data_width - 1 loop
+				c :=c+((A mod 2**(data_width-i))/2**(data_width-1-i));
+			end loop;
+		if c mod 2 = 1 then
+			return '1';
+		else 
+			return '0';
+		end if; 
 	end REX;
 
 	function setLsb (constant A: data_type; constant b_set: bit) return data_type is
@@ -117,15 +109,9 @@ package body logical_defs_pack is
 
 		begin
 		
-		tmp_x := natural2bit_vector(A);	
-
-		-- for most significant bit, use:
-		--tmp_x(tmp_x'LENGTH) := b_set;
-
-		-- set the least significant bit to b_set
-		tmp_x(0) := b_set;
-
-		return bit_vector2natural(tmp_x);
+		if b_set = '1' then return (A / 2) * 2 + 1;
+ 		else return (A / 2) * 2;
+		end if;
 	end setLsb;
 
 end logical_defs_pack;

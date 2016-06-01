@@ -32,7 +32,7 @@ package body IO_defs_pack is
 		variable l:line;
 		
 		begin
-		write(l , string'("PC  | Cmd  | XYZ | P    | R0  | R1  | R2  | R3  | ZCNO"));
+		write(l , string'("PC  | Cmd  | XYZ | P   | R0  | R1  | R2  | R3  | ZCNO"));
 		writeline(f , l);
 		write( l , string'("------------------------------------------------------"));
 		writeline( f , l );

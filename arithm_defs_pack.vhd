@@ -2,6 +2,8 @@ library ieee ;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use std.textio.all;
+
 use WORK.cpu_defs_pack.all;
 use WORK.mem_defs_pack.all;
 --ramzi
@@ -13,7 +15,7 @@ package arithm_defs_pack is
 	      constant A, B     : in data_type;				
 	      constant CI       : in boolean;
 	      variable R        : out data_type;
-	      variable Z,CO,N,O : out boolean);
+	      variable Z,CO,N,O : inout boolean);
 				
 	--- procedure SUBC declaration
 	
@@ -21,7 +23,8 @@ package arithm_defs_pack is
 	      constant A, B     : in data_type;				
 	      constant CI       : in boolean;
 	      variable R        : out data_type;
-	      variable Z,CO,N,O : out boolean);
+	      variable Z,CO,N,O : inout boolean);
+	
 
 end arithm_defs_pack;
 
@@ -34,10 +37,10 @@ package body arithm_defs_pack is
 	  constant A, B     : in data_type; --- input variables
 		constant CI       : in boolean; --- input carry 
 		variable R        : out data_type;  --- result
-		variable Z,CO,N,O : out boolean) is --- zero,  carry output, Negative,   Overflow
+		variable Z,CO,N,O : inout boolean) is --- zero,  carry output, Negative,   Overflow
 				
           variable T: integer := A+B+Boolean'Pos(CI); -- make the unsigned sum
-	  
+	  variable p: line;
 	variable A_s, B_s, T_s :integer; -- signed interpretation
 
 	  begin
@@ -56,35 +59,15 @@ package body arithm_defs_pack is
 	    end if;
 		
 	    T_s := A_s + B_s + Boolean'Pos( CI ); -- make the signed sum
+	   
+	   if T_s >= 2**(data_width-1) or T_s < -2**(data_width-1) then CO:= true;
+	   else CO := false; end if;
 		
-		  --- output carry 
-		  if T >= 2**data_width then
-	      R := T-2**(data_width); 
-	      CO := True; 
-	    else 
-	      R := T;
-	      CO := False;
-	    end if;	
-	  
-	    --- zero
-	    if T mod 2**data_width = 0 then 
-	      z := True;
+	    Set_Flags_Load(T_s, Z, N, O);
+	    if T_s<0 then 
+		R := T_s + 2**data_width;
 	    else
-	      z := False;
-	    end if;
-	  
-	    --- Negative
-	    if T_s < 0 then 
-	      N := True;
-	    else
-	      N := False;
-	    end if;
-	  
-	    --- overflow
-	    if (T_s < -2**(data_width-1)) or (T_s >= 2**(data_width-1)) then 
-	      O := True;
-	    else 
-	      O:= False;
+		R:= T_s mod 2**data_width;
 	    end if;
 	end EXEC_ADDC;  
 	
@@ -94,7 +77,7 @@ package body arithm_defs_pack is
           constant A, B     : in data_type;  --- input variables
 	  constant CI       : in boolean;  --- input carry 
           variable R        : out data_type;   --- result
-	  variable Z,CO,N,O : out boolean )is --- zero, output carry, Negative,   Overflow
+	  variable Z,CO,N,O : inout boolean )is --- zero, output carry, Negative,   Overflow
 				
 	variable T: integer := A-B-Boolean'Pos( CI );
 	variable A_s, B_s, T_s :integer; -- signed interpretation
@@ -114,36 +97,15 @@ package body arithm_defs_pack is
 		
 		T_s := A_s-B_s-Boolean'Pos( CI );
 		
-		--- output carry
-		if T < 0 then      
-			R := T + 2**data_width;    
-			CO := TRUE;   
-		else   
-   			R := T;     
-			CO := FALSE;   
-		end if;	
+		 if T_s >= 2**(data_width-1) or T_s < -2**(data_width-1) then CO:= true;
+	   else CO := false; end if;
 		
-	  --- zero
-	  
-  		if T = 0 then
-  		  Z := TRUE;  
- 		else     
- 			Z := FALSE;   
-		end if;
-	  
-	  --- Negative
-	  if T_s < 0 then
-	  		N := TRUE;
-  		else
-     	N := FALSE;
-   	end if;
-	  
-	  --- overflow
-	  if (T_s < -2**(data_width-1)) or (T_s >= 2**(data_width-1)) then
- 	  	 O := TRUE;
-		else
-		  O := FALSE;
-		end if;
+	    Set_Flags_Load(T_s, Z, N, O);
+	    if T_s<0 then 
+		R := T_s + 2**data_width;
+	    else
+		R:= T_s mod 2**data_width;
+            end if;
 	end EXEC_SUBC;
 	
 

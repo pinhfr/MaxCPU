@@ -1,5 +1,3 @@
-use WORK.bit_vector_natural_pack.all;
-
 package cpu_defs_pack is
 
 	constant bus_width  : natural := 12;

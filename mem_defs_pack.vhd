@@ -44,6 +44,7 @@ package body mem_defs_pack is
 		variable success : boolean;
 		variable v: data_type;
 		variable i: addr_type := 0;
+		
 	
 		begin
 		
@@ -71,13 +72,14 @@ package body mem_defs_pack is
 	procedure dump_memory(
 		variable f : out text;
 		variable mem: in mem_type) is
+
 		variable i: addr_type := 0;
-		variable l: line;
+		variable l_d: line;
 	
 		begin
 			for i in 0 to 2**addr_width -1 loop
-				write(l, mem(i));
-				writeline(f,l);
+				write(l_d, mem(i));
+				writeline(f,l_d);
 			end loop; 
 	end dump_memory;
 
@@ -92,10 +94,13 @@ package body mem_defs_pack is
 		variable Z, N, O: out Boolean) is
 
   variable data_var: data_type:=0;  
-   variable data_int:integer:=0;	
+   variable data_int:integer:=0;
+  variable p: line;	
   begin
 	data_var := memory(PC); -- take content from memory(PC)
  	Reg_X := data_var; -- store it in Reg(X)
+	--write(p, data_var);
+	--writeline(output, p);
 	PC:=INC(PC); -- increment PC by 1
 	if data_var >= 2**(data_width-1) then
  		data_int:= data_var -2**(data_width);
@@ -118,9 +123,11 @@ package body mem_defs_pack is
   variable address: data_type:=0;
   variable data_var: data_type:=0;
   variable data_int:integer:=0;	
+
   begin
 	address := memory(PC); -- address is the value in memory(PC)
 	data_var := memory(address); -- take content from memory(address)
+	
 	Reg_X := data_var;  -- store it in Reg(X)
 	PC:=INC(PC); -- increment PC by 1
 	if data_var >= 2**(data_width-1) then
@@ -147,6 +154,7 @@ package body mem_defs_pack is
 begin
 	address := Reg_Y; -- address is the value in Reg(Y)
 	data_var := memory(address); -- take content from memory(address)
+
 	Reg_X := data_var;  -- store it in Reg(X)
 	if data_var >= 2**(data_width-1) then
  		data_int:= data_var -2**(data_width);
@@ -183,7 +191,5 @@ begin
 	memory(address):= Reg_X;  -- assign content of Reg(X) in memory indexed by address
   end EXEC_str;
   -- end str
-
-
 
 end mem_defs_pack;

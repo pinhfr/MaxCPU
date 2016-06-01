@@ -134,13 +134,13 @@ begin
 					Reg(X) := Data;
 
 				when code_rea => write_NoParam(l);
-					Reg(X) := setLsb(X, REA(Y));
+					Reg(X) := setLsb(Reg(X), REA(Reg(Y)));
 
 				when code_reo => write_NoParam(l);
-					Reg(X) := setLsb(X, REO(Y));
+					Reg(X) := setLsb(Reg(X), REO(Reg(Y)));
 
 				when code_rex => write_NoParam(l);
-					Reg(X) := setLsb(X, REX(Y));
+					Reg(X) := setLsb(Reg(X), REX(Reg(Y)));
 
 					------------------------------------------------- SHIFT/ROTATE
 
@@ -171,7 +171,7 @@ begin
 					else Carry := false;
 					end if;
 					tmp := Reg(Y) / 2;
-					Data := tmp mod 2 ** (data_width - 1);
+					Data := tmp mod 2 ** (data_width);
 					Set_Flags_Load(Data, Reg(Y), Zero, Negative, Overflow);
 					Reg(X) := Data;
 
@@ -183,7 +183,7 @@ begin
 					else Carry := false;
 					end if;
 					tmp := Reg(Y) - (Reg(Y) mod 2 ** (data_width - 1)) + Reg(Y) / 2;
-					Data := tmp mod 2 ** (data_width - 1);
+					Data := tmp mod 2 ** (data_width);
 					Set_Flags_Load(Data, Reg(Y), Zero, Negative, Overflow);
 					Reg(X) := Data;
 
@@ -191,7 +191,7 @@ begin
 					-- 011101 => 001110; 1
 				when code_rol => write_NoParam(l);
 					tmp := (Reg(Y) mod 2 ** (data_width - 1)) * 2 + Reg(Y) / 2 ** (data_width - 1);
-				Data := tmp mod 2 ** (data_width - 1);
+				Data := tmp mod 2 ** (data_width);
 				Set_Flags_Load(Data, Reg(Y), Zero, Negative, Overflow);
 				Reg(X) := Data;
 
@@ -206,7 +206,7 @@ begin
 					Carry := true;
 				else Carry := false;
 				end if;
-				Data := tmp mod 2 ** (data_width - 1);
+				Data := tmp mod 2 ** (data_width);
 				Set_Flags_Load(Data, Reg(Y), Zero, Negative, Overflow);
 				Reg(X) := Data;
 
@@ -215,7 +215,7 @@ begin
 				when code_ror => write_NoParam(l);
 					tmp := Reg(Y) / 2 + (Reg(Y) mod 2) * 2 ** (data_width - 1);
 					--Set_Flags_Load(tmp, Zero, Negative, Overflow);
-					Data := tmp mod 2 ** (data_width - 1);
+					Data := tmp mod 2 ** (data_width);
 					Reg(X) := Data;
 
 					-- 100101 => 110010
@@ -229,8 +229,7 @@ begin
 						Carry := true;
 					else Carry := false;
 					end if;
-					Data := tmp mod 2 ** (data_width - 1);
-					Set_Flags_Load(Data, Reg(Y), Zero, Negative, Overflow);
+					Data := tmp mod 2 ** (data_width);					Set_Flags_Load(Data, Reg(Y), Zero, Negative, Overflow);
 					Reg(X) := Data;
 			 
 					-- 1;00101 => 1;10010
@@ -248,7 +247,7 @@ begin
 					EXEC_ldc(memory, Reg(X), PC, zero, Negative, Overflow); 
 					--PC := INC(PC); 
 			 
-				when code_ldd => write_Param(l, Memory(Memory(PC)));
+				when code_ldd => write_Param(l, Memory(PC));
 					EXEC_ldd(memory, Reg(X), PC, zero, Negative, Overflow);
 					--PC := INC(PC);
 
@@ -256,7 +255,7 @@ begin
 					EXEC_ldr(memory, Reg(Y), Reg(X), zero, Negative, Overflow);
 					--PC := INC(PC);
 			 
-				when code_std => write_Param(l, Memory(Memory(PC)));
+				when code_std => write_Param(l, Memory(PC));
 					EXEC_std(memory, Reg(X), PC); 
 					--PC := INC(PC);
 
@@ -280,6 +279,7 @@ begin
 					end if;
 			 
 				when code_out => write_NoParam(l);
+					write(l_out, Reg(X));
 					writeline(IOOutputFile, l_out);
 			 
 					------------------------------------------------- JUMP OPERATIONS
@@ -339,13 +339,6 @@ begin
 
 			write_regs (l, Reg, Zero, Carry, Negative, Overflow);
 			writeline (TraceFile, l);
-			 
-			--if illegal = false then
-			-- write_regs (l, Reg, Zero, Carry, Negative, Overflow);
-			-- writeline(TraceFile, l);
-			--else
-			-- illegal := false;
-			--end if;
  
 		end loop;
 	end process;
