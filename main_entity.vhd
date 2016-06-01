@@ -299,42 +299,34 @@ begin
 				when code_jz => write_Param(l, Memory(PC));
 					if Zero then
 						PC := Memory(PC); -- Jump if Zero flag = '1'
-					else PC := INC(PC);
 					end if;
 				when code_jc => write_Param(l, Memory(PC));
 					if Carry then
 						PC := Memory(PC); -- Jump if Carry flag = '1'
-					else PC := INC(PC);
 					end if;
 				when code_jn => write_Param(l, Memory(PC));
 					if Negative then
 						PC := Memory(PC); -- Jump if Negative flag is = '1'
-					else PC := INC(PC);
 					end if;
 				when code_jo => write_Param(l, Memory(PC));
 					if Overflow then
 						PC := Memory(PC); -- Jump if Overflow flag is = '1'
-					else PC := INC(PC);
 					end if;
 				when code_jnz => write_Param(l, Memory(PC));
 					if not Zero then
 						PC := Memory(PC); -- Jump if Zero flag = '0'
-					else PC := INC(PC);
 					end if;
 				when code_jnc => write_Param(l, Memory(PC));
 					if not Carry then
 						PC := Memory(PC); -- Jump if Carry flag = '0'
-					else PC := INC(PC);
 					end if;
 				when code_jnn => write_Param(l, Memory(PC));
 					if not Negative then
 						PC := Memory(PC); -- Jump if Negative flag is = '0'
-					else PC := INC(PC);
 					end if;
 				when code_jno => write_Param(l, Memory(PC));
 					if not Overflow then
 						PC := Memory(PC); -- Jump if Negative flag is = '0'
-					else PC := INC(PC);
 					end if;
 
 					------------------------------------------------- UNEXPECTED CODE
