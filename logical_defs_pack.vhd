@@ -47,8 +47,8 @@ package body logical_defs_pack is
 		c:=0;
 		v:=0;
 		for i in 0 to data_width - 1 loop
-				v:=((A mod 2**(data_width-i))/2**(data_width-1-i))+((B mod 2**(data_width-i))/2**(data_width-1-i));
-				c :=c+2**(data_width-1-i)*((v+v/2)Ãmod 2);
+				v:=((A mod 2**(data_width-i))/2**(data_width-1-i))+((B mod 2**(data_width-i))/2**(data_width-1-i))+((A mod 2**(data_width-i))/2**(data_width-1-i))*((B mod 2**(data_width-i))/2**(data_width-1-i));
+				c :=c+2**(data_width-1-i)*(v mod 2);
 			end loop;
 		return c;
 	end "OR";
