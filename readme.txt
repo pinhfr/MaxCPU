@@ -1,14 +1,14 @@
-Für dieses Projekt haben wir die Opcodes geteilt. In jeder Teil von Main Entity haben wir die Name der Programmierer geschrieben. Die Funktionen, die in einer Teil gerufen werden, wurden von der Autor des Teils geschrieben.
-Um unsere ests zu machen schreiben wir direkt in MemoryFile.
+FÃ¼r dieses Projekt haben wir die Opcodes geteilt. In jedem Teil von Main Entity haben wir den Namen des Programmierer geschrieben. Die Funktionen, die in einem Teil gerufen werden, wurden von der Autor des Teils geschrieben.
+Um unsere Tests zu machen schreiben wir direkt in MemoryFile.
 
 Wir haben auch:
- - randomFile.py: ein Program, der 101 zufällige Befehle und 11 zufällige inputs generiert
+ - randomFile.py: ein Program, der 101 zufÃ¤llige Befehle und 11 zufÃ¤llige inputs generiert
  - test.txt: eine Datei, die jeder Opcode testet
- - Opcodes.xslx: eine Excel Datei, die die Übersetzung zwischen Opcodes und Zahlen macht
+ - Opcodes.xslx: eine Excel Datei, die die Ãœbersetzung zwischen Opcodes und Zahlen macht
 
 Um unseres Program zu testen, haben wir so gemacht:
- - Zufällige opcodes mit randomFile.py in MemoryFile generieren, um ein zufälliger kontext zu haben
+ - ZufÃ¤llige opcodes mit randomFile.py in MemoryFile generieren, um ein zufÃ¤lliger kontext zu haben
  - Den 64 am ende entfernen (CODE STOP)
- - Zeilen 102 bis am Ende von test.txt am Ende des MemoryFile hinfügen
+ - Zeilen 102 bis am Ende von test.txt am Ende des MemoryFile hinfÃ¼gen
  - Die Simulation laufen
- - Dateien TraceFile, IO_OutputFile und DumpFile prüfen
+ - Dateien TraceFile, IO_OutputFile und DumpFile prÃ¼fen
