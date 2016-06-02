@@ -1,5 +1,6 @@
 # MaxCPU
 Functional CPU Model within the scope of the lecture "Entwurf digitaler Systeme mit VHDL und SystemC" (TUM SS16)
+--
 
 Für dieses Projekt haben wir die Opcodes zwischen jedem Gruppenmitglied aufgeteilt. In jedem Teil von Main Entity haben wir den Namen des Programmierer geschrieben. Die Funktionen, die in einem Teil gerufen werden, wurden von der Autor des Teils geschrieben.
 Um unsere Tests zu machen schreiben wir direkt in MemoryFile.
