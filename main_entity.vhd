@@ -85,7 +85,7 @@ begin
 					print_tail(TraceFile );
 					dump_memory(DumpFile, Memory); 
 					wait;
-					------------------------------------------------- ARITHMETIC
+					------------------------------------------------- ARITHMETIC -- Ramzi Chaaben
 			 
 					-- Memory() and Reg() at the same line means
 					-- they will run simultaneously
@@ -107,7 +107,7 @@ begin
 				when code_subc => write_NoParam(l);
 					EXEC_SUBC(Reg(Y), Reg(Z), Carry, Reg(X), Zero, Carry, Negative, Overflow);
 
-					------------------------------------------------- LOGICAL
+					------------------------------------------------- LOGICAL -- Francys Pinheiro
 					-- OPCODE D S1 S2
 					-- not ~ D := not S1
 					-- and ~ D := S1 and S2
@@ -149,7 +149,7 @@ begin
 					Reg(X) := setLsb(Reg(X), REX(Reg(Y)));
 					Carry  := False;
 
-					------------------------------------------------- SHIFT/ROTATE
+					------------------------------------------------- SHIFT/ROTATE -- Bruno Quercia
 
 					-- sll ~ Carry & D := S1 & '0'
 					-- srl ~ D & Carry := '0' & S1
@@ -272,7 +272,7 @@ begin
 					EXEC_str(memory, Reg(Y), Reg(X));
 					--PC := INC(PC);
 
-					------------------------------------------------- I/O
+					------------------------------------------------- I/O -- Ramzi Chaaben
 
 					-- in D _ _ ~ D := data_from_input_device
 					-- out S _ _ ~ data_to_output_device := S
@@ -291,7 +291,7 @@ begin
 					write(l_out, Reg(X));
 					writeline(IOOutputFile, l_out);
 			 
-					------------------------------------------------- JUMP OPERATIONS
+					------------------------------------------------- JUMP OPERATIONS -- Bruno Quercia
 
 				when code_jmp => write_Param(l, Memory(PC));
 					PC := Memory(PC); -- Unconditional Jump. Simply points to the memory address
