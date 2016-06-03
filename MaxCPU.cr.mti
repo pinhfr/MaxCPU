@@ -1,0 +1,92 @@
+C:/Users/bruno_000/Documents/MaxCPU/main_entity.vhd {2 {vcom -work work -2002 -explicit -stats=none C:/Users/bruno_000/Documents/MaxCPU/main_entity.vhd
+Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
+-- Loading package STANDARD
+-- Loading package cpu_defs_pack
+-- Loading package TEXTIO
+-- Loading package mem_defs_pack
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package arithm_defs_pack
+-- Loading package logical_defs_pack
+-- Loading package IO_defs_pack
+-- Compiling entity MaxCPU
+-- Compiling architecture functional of MaxCPU
+** Warning: C:/Users/bruno_000/Documents/MaxCPU/main_entity.vhd(15): (vcom-1194) FILE declaration was written using VHDL 1987 syntax.
+
+** Warning: C:/Users/bruno_000/Documents/MaxCPU/main_entity.vhd(16): (vcom-1194) FILE declaration was written using VHDL 1987 syntax.
+
+** Warning: C:/Users/bruno_000/Documents/MaxCPU/main_entity.vhd(17): (vcom-1194) FILE declaration was written using VHDL 1987 syntax.
+
+** Warning: C:/Users/bruno_000/Documents/MaxCPU/main_entity.vhd(18): (vcom-1194) FILE declaration was written using VHDL 1987 syntax.
+
+** Warning: C:/Users/bruno_000/Documents/MaxCPU/main_entity.vhd(19): (vcom-1194) FILE declaration was written using VHDL 1987 syntax.
+
+
+} {} {}} C:/Users/bruno_000/Documents/MaxCPU/mem_defs_pack.vhd {2 {vcom -work work -2002 -explicit -stats=none C:/Users/bruno_000/Documents/MaxCPU/mem_defs_pack.vhd
+Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
+-- Loading package STANDARD
+-- Loading package cpu_defs_pack
+-- Loading package TEXTIO
+-- Compiling package mem_defs_pack
+** Warning: C:/Users/bruno_000/Documents/MaxCPU/mem_defs_pack.vhd(8): (vcom-1135) Subprogram parameter f is declared using VHDL 1987 syntax.
+
+** Warning: C:/Users/bruno_000/Documents/MaxCPU/mem_defs_pack.vhd(37): (vcom-1135) Subprogram parameter f is declared using VHDL 1987 syntax.
+
+-- Compiling package body mem_defs_pack
+-- Loading package mem_defs_pack
+** Warning: C:/Users/bruno_000/Documents/MaxCPU/mem_defs_pack.vhd(44): (vcom-1135) Subprogram parameter f is declared using VHDL 1987 syntax.
+
+** Warning: C:/Users/bruno_000/Documents/MaxCPU/mem_defs_pack.vhd(71): (vcom-1135) Subprogram parameter f is declared using VHDL 1987 syntax.
+
+
+} {} {}} C:/Users/bruno_000/Documents/MaxCPU/logical_defs_pack.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/bruno_000/Documents/MaxCPU/logical_defs_pack.vhd
+Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
+-- Loading package STANDARD
+-- Loading package cpu_defs_pack
+-- Compiling package logical_defs_pack
+-- Compiling package body logical_defs_pack
+-- Loading package logical_defs_pack
+
+} {} {}} C:/Users/bruno_000/Documents/MaxCPU/IO_defs_pack.vhd {2 {vcom -work work -2002 -explicit -stats=none C:/Users/bruno_000/Documents/MaxCPU/IO_defs_pack.vhd
+Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
+-- Loading package STANDARD
+-- Loading package cpu_defs_pack
+-- Loading package TEXTIO
+-- Compiling package IO_defs_pack
+** Warning: C:/Users/bruno_000/Documents/MaxCPU/IO_defs_pack.vhd(5): (vcom-1135) Subprogram parameter f is declared using VHDL 1987 syntax.
+
+** Warning: C:/Users/bruno_000/Documents/MaxCPU/IO_defs_pack.vhd(6): (vcom-1135) Subprogram parameter f is declared using VHDL 1987 syntax.
+
+-- Compiling package body IO_defs_pack
+-- Loading package IO_defs_pack
+** Warning: C:/Users/bruno_000/Documents/MaxCPU/IO_defs_pack.vhd(30): (vcom-1135) Subprogram parameter f is declared using VHDL 1987 syntax.
+
+** Warning: C:/Users/bruno_000/Documents/MaxCPU/IO_defs_pack.vhd(42): (vcom-1135) Subprogram parameter f is declared using VHDL 1987 syntax.
+
+
+} {} {}} C:/Users/bruno_000/Documents/MaxCPU/cpu_defs_pack.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/bruno_000/Documents/MaxCPU/cpu_defs_pack.vhd
+Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
+-- Loading package STANDARD
+-- Compiling package cpu_defs_pack
+-- Compiling package body cpu_defs_pack
+-- Loading package cpu_defs_pack
+
+} {} {}} C:/Users/bruno_000/Documents/MaxCPU/clk_gen_entitv.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/bruno_000/Documents/MaxCPU/clk_gen_entitv.vhd
+Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
+-- Loading package STANDARD
+-- Compiling entity ClkGen
+-- Compiling architecture dataflow of ClkGen
+
+} {} {}} C:/Users/bruno_000/Documents/MaxCPU/arithm_defs_pack.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/bruno_000/Documents/MaxCPU/arithm_defs_pack.vhd
+Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package cpu_defs_pack
+-- Loading package mem_defs_pack
+-- Compiling package arithm_defs_pack
+-- Compiling package body arithm_defs_pack
+-- Loading package arithm_defs_pack
+
+} {} {}}
